@@ -1,0 +1,231 @@
+body {
+	background: #f8f8f8;
+	height: 100%;
+}
+button{
+	border: none;
+}
+/*清除浮动代码*/ 
+.clearfloat:after{display:block;clear:both;content:"";visibility:hidden;height:0} 
+.clearfloat{zoom:1} 
+.w1200 {
+	width: 1200px;
+	margin: 0 auto;
+}
+
+a {
+	text-decoration: none;
+}
+
+.header {
+	background: #c187ff;
+	height: 50px;
+}
+
+.header ul {
+	width: 340px;
+	float: right;
+}
+
+.header ul li {
+	float: left;
+	line-height: 50px;
+	font-size: 14px;
+	color: #ffffff;
+	margin-left: 48px;
+}
+
+
+/*left菜单*/
+
+.main {
+	position: relative;
+	margin-top: 50px;
+}
+
+.main .left-menu {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	min-height: 500px;
+	box-sizing: border-box;
+	
+	width: 150px;
+	background: #434343;
+	padding-top: 12px;
+	
+}
+
+.main .right-detail {
+	float: right;
+	width: 1040px;
+
+}
+
+.main .left-menu .top-img {
+	width: 104px;
+	height: 104px;
+	border-radius: 50%;
+	margin-left: 25px;
+}
+
+.left-menu p {
+	text-align: center;
+}
+
+.left-menu .name {
+	line-height: 34px;
+	font-size: 18px;
+	color: #FFFFFF;
+}
+
+.left-menu .job {
+	line-height: 34px;
+	font-size: 14px;
+	color: #FFFFFF;
+}
+
+.left-menu ul {}
+
+.left-menu ul li a {
+	padding-left: 25px;
+	display: block;
+	line-height: 40px;
+	font-size: 14px;
+	color: #FFFFFF;
+}
+
+.left-menu ul li:hover a {
+	background: #d8e1fe;
+	color: #434343;
+}
+
+.left-menu li img {
+	width: 15px;
+	height: 15px;
+	margin-right: 10px;
+}
+
+/*首页右侧*/
+.right-detail .event{
+	float: left;
+	box-sizing: border-box;
+	width: 426px;
+	height: 200px;
+	padding: 10px;
+	background: #FFFFFF;
+	
+	
+}
+.right-detail .event h5{
+	font-size: 18px;
+	line-height: 20px;
+	color: #333333;
+}
+.right-detail .event div{
+	margin-top: 54px;
+	float: left;
+}	
+.right-detail .event .left{
+	width: 200px;
+	
+}
+.right-detail .event .right{
+	width: 200px;
+	
+}
+.right-detail .event div p{
+	text-align: center;
+	line-height: 20px;
+}
+.right-detail .event  p span{
+	text-align: center;
+	font-size: 48px;
+	color: #5d5d5d;
+	
+}
+.right-detail .event .line{
+	width: 2px;
+	height: 33px;
+	background: #407eff;
+}
+.right-detail .attendance{
+	box-sizing: border-box;
+	width: 580px;
+	height: 200px;
+	float: right;
+	padding: 10px;
+	background: #FFFFFF;
+}
+.right-detail .attendance h5{
+	font-size: 18px;
+	line-height: 20px;
+	color: #333333;
+}
+.right-detail .attendance ul{
+	margin-top: 32px;
+}
+.right-detail .attendance li{
+	border-radius: 10px;
+	float: left;
+	margin-left: 44px;
+	width: 90px;
+	height: 95px;
+	color: #FFFFFF;
+}
+.right-detail .attendance li span{
+	font-size: 48px;
+	line-height: 60px;
+}
+.right-detail .attendance li p{
+	text-align: center;
+}
+
+.attendance a{
+	display: block;
+	background: #5473c6;
+	width: 400px;
+	height: 60px;
+	margin: 0 auto;
+	border-radius: 5px;
+	line-height: 60px;
+	color: #FFFFFF;
+	text-align: center;
+	margin-bottom: 24px;
+}
+.qian span{
+	float: left;
+	margin-left: 4px;
+	margin-right: 4px;
+}
+.qian .num{
+ margin-left: 112px;
+}
+.qian p{
+	margin-top: 6px;
+	width: 156px;
+	height: 1px;
+	float: left;
+	background: #858585;
+}
+.qian .log{
+	text-align: center;
+	
+	margin: 0 auto;
+	background: #fbeeff;
+	width: 314px;
+	height: 52px;
+	border-radius: 5px;
+	line-height: 52px;
+	font-size: 18px;
+	color: #666666;
+}
+.ka{
+	float: left;
+	box-sizing: border-box;
+	width: 426px;
+	height: 200px;
+	padding: 10px;
+	background: #FFFFFF;
+}

@@ -1,0 +1,16 @@
+GET http://localhost:8080/ssm02/article/delete/53
+Accept:*/*
+Cache-Control:no-cache
+
+<> 2018-01-14T114851.500.html
+
+###
+
+GET http://localhost:8080/ssm02
+Accept:*/*
+Cache-Control:no-cache
+
+<> 2018-01-14T114820.200.html
+
+###
+

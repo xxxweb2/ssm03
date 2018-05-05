@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xxxweb.dao.UserDao">
+    <!-- 目的：为dao接口方法提供sql语句配置 -->
+
+    <select id="getUserByName" resultType="com.xxxweb.entity.QfUser" parameterType="String">
+        <!-- 具体的sql -->
+        SELECT * from qf_user where username=#{username}
+    </select>
+
+    <!--插入数据-->
+    <insert id="saveUser" parameterType="com.xxxweb.entity.QfUser">
+        insert into qf_user (`username`,`password`,`name`,`edu`,`sex`,`professional`,`age`,`marriage`,`tel`,`cardid`,`position_id`,`job`,`intime`,`state`)
+        values(#{username},#{password},#{name},#{edu},#{sex},#{professional},#{age},#{marriage},#{tel},#{cardid},#{position_id},#{job},#{intime},#{state});
+    </insert>
+
+
+    <select id="getUserList" resultType="com.xxxweb.entity.QfUser">
+        <!-- 具体的sql -->
+        SELECT * from qf_user
+    </select>
+    <delete id="delteUserById" parameterType="int">
+
+          DELETE FROM qf_user WHERE id = #{id}
+    </delete>
+    <!---->
+
+    <select id="getUserById" resultType="com.xxxweb.entity.QfUser" parameterType="int">
+        <!-- 具体的sql -->
+        SELECT * from qf_user WHERE id=#{id}
+    </select>
+
+
+    <update id="updateUser" parameterType="com.xxxweb.entity.QfUser">
+UPDATE qf_user SET
+username=#{username},
+password=#{password},
+name=#{name},
+edu=#{edu},
+sex=#{sex},
+professional=#{professional},
+age=#{age},
+marriage=#{marriage},
+tel=#{tel},
+cardid=#{cardid},
+position_id=#{position_id},
+job=#{job},
+intime=#{intime},
+state=#{state}
+ WHERE id=#{id}
+    </update>
+
+</mapper>
