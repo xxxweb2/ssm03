@@ -6,20 +6,27 @@ import com.xxxweb.service.SignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 public class SignServiceImpl implements SignService {
-	@Autowired
-	private SignDao signDao;
-	public Integer noClockCountByMonth(int id, int month, int state) {
-		return signDao.noClockCountByMonth(id, month,state);
-	}
+    @Autowired
+    private SignDao signDao;
+
+    public Integer noClockCountByMonth(int id, int month, int state) {
+        return signDao.noClockCountByMonth(id, month, state);
+    }
 
 
-	public void insertSign(Sign sign) {
-		signDao.insertSign(sign);
-	}
+    public void insertSign(Sign sign) {
+        signDao.insertSign(sign);
+    }
 
-	public int isDa(int day) {
-		return signDao.isDa(day);
-	}
+    public int isDa(int day) {
+        return signDao.isDa(day);
+    }
+
+    public ArrayList<Sign> getSignListDetail(int id, int day) {
+        return signDao.getSignListDetail(id, day);
+    }
 }

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -44,6 +45,17 @@ public class AdminController {
         model.addAttribute("laterCount", laterCount);
         model.addAttribute("noClockCount", noClockCount);
 
+
+//        查看打卡情况 在首页显示
+        Calendar calendar1 = Calendar.getInstance();
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+        QfUser user = (QfUser) session.getAttribute("user");
+
+
+        ArrayList<Sign> signListDetail = signService.getSignListDetail(user.getId(), day);
+        model.addAttribute("signList", signListDetail);
+        System.out.println("singlist: " + signListDetail);
         return "admin/index";
     }
 

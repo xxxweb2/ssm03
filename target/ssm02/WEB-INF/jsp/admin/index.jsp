@@ -1,11 +1,21 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="common/header.jsp" %>
+<style>
+    .right-detail .attendance .time1, .right-detail .attendance .time2 {
+        width: 310px;
+        height: 50px;
+        background: #fbeeff;
+        line-height: 50px;
+        font-size: 18px;
+        color: #666666;
+        text-align: center;
+        margin-left: 126px;
+    }
+</style>
 <div class="right-detail">
-
     <div class="event">
         <h5>待处理事件</h5>
-
         <div class="left">
             <p><span>8</span>条</p>
             <p>待审核事件</p>
@@ -79,10 +89,19 @@
             <p></p><span>2次</span>
             <p></p>
         </div>
-        <div style="height: 24px;"></div>
-        <div class="time1">上午上班：08：00</div>
-        <div style="height: 12px;"></div>
-        <div class="time2">下午下班：18：00</div>
+
+        <c:forEach items="${requestScope.get('signList')}" var="item">
+            <div>
+                <div style="height: 24px;"></div>
+                <div class="time1">${item.time}</div>
+            </div>
+        </c:forEach>
+
+
+        <%--<div style="height: 24px;"></div>--%>
+        <%--<div class="time1">上午暂未打卡</div>--%>
+        <%--<div style="height: 12px;"></div>--%>
+        <%--<div class="time2">下午暂未打卡</div>--%>
     </div>
 </div>
 </div>
@@ -103,13 +122,17 @@
             var m = date.getMinutes(); //获取分钟
             var s = date.getSeconds(); //获取秒
             var d = document.getElementById('Date');
-            if (code == 1) {
-                $('.time1').html('当前时间:' + year + '年' + mon + '月' + da + '日' + '星期' + day + ' ' + h + ':' + m + ':' + s);
-            }
-            if (code == 2) {
-                $('.time2').html('当前时间:' + year + '年' + mon + '月' + da + '日' + '星期' + day + ' ' + h + ':' + m + ':' + s);
-            }
+
+            var time = year + '年' + mon + '月' + da + '日' + ' ' + h + ':' + m + ':' + s;
+            $('.attendance').append("  <div> <div style='height: 24px;'></div><div class='time1'>" + time + "</div></div>");
+
+            // $('.time1').html('当前时间:' + year + '年' + mon + '月' + da + '日' + '星期' + day + ' ' + h + ':' + m + ':' + s);
+            // }
+            // if (code == 2) {
+            //     $('.time2').html('当前时间:' + year + '年' + mon + '月' + da + '日' + '星期' + day + ' ' + h + ':' + m + ':' + s);
+            // }
         });
     });
+
 </script>
 <%@ include file="common/footer.jsp" %>

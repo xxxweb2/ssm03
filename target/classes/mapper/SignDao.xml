@@ -17,4 +17,8 @@
     <select id="isDa" parameterType="int" resultType="int">
         SELECT COUNT(*) from sign where DAYOFMONTH (time) = #{DAY}
     </select>
+    <!---->
+    <select id="getSignListDetail" parameterType="int" resultType="com.xxxweb.entity.Sign">
+        SELECT * from sign where   uid=#{id} and DAYOFMONTH (time) = #{day} limit 2
+    </select>
 </mapper>
