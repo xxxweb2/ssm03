@@ -76,10 +76,7 @@
             <label for="exampleInputEmail1">职位</label>
             <input name="job" type="text" class="form-control" id="" placeholder="专业">
         </div>
-        <div class="form-group">
-            <label for="exampleInputEmail1">入职时间</label>
-            <input name="intime" type="text" class="form-control" id="exampleInputEmail1" placeholder="入职时间">
-        </div>
+
         <div class="form-group">
             <label for="exampleInputEmail1">状态</label>
             <select name="state" class="form-control" style="width: 50%;">

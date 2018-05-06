@@ -104,7 +104,7 @@
         </div>
         <div class="form-group">
             <label for="exampleInputEmail1">入职时间</label>
-            <input value="${user.intime}" name="intime" type="text" class="form-control" id="exampleInputEmail1" placeholder="入职时间">
+            <input readonly value="${user.intime}"  type="text" class="form-control" id="exampleInputEmail1" placeholder="入职时间">
         </div>
         <div class="form-group">
             <label for="exampleInputEmail1">状态</label>

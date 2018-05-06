@@ -17,4 +17,6 @@ public interface SignDao {
     int isDa(int day);
 
     ArrayList<Sign> getSignListDetail(@Param("id") int id, @Param("day") int day);
+
+    int countDa(@Param("id")int id, @Param("year")int year, @Param("month")int month);
 }

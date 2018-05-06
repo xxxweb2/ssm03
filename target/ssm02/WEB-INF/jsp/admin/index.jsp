@@ -91,7 +91,7 @@
         </div>
 
         <c:forEach items="${requestScope.get('signList')}" var="item">
-            <div>
+            <div class="detail">
                 <div style="height: 24px;"></div>
                 <div class="time1">${item.time}</div>
             </div>
@@ -107,6 +107,11 @@
 </div>
 <script type="text/javascript">
     $('#da').on('click', function () {
+        if ($('.attendance .detail').length > 1) {
+            $("#da").attr("disabled", true);
+            return;
+        }
+        
         $.get('${pageContext.request.contextPath}/admin/da', function (code) {
             if (code == 0) {
                 alert('打卡失败,请稍后重试');
@@ -116,7 +121,7 @@
             var date = new Date();
             var year = date.getFullYear(); //获取当前年份
             var mon = date.getMonth() + 1; //获取当前月份
-            var da = date.getDate(); //获取当前日
+            var da = date.getDate(); //获取当前日+
             var day = date.getDay(); //获取当前星期几
             var h = date.getHours(); //获取小时
             var m = date.getMinutes(); //获取分钟
@@ -124,13 +129,19 @@
             var d = document.getElementById('Date');
 
             var time = year + '年' + mon + '月' + da + '日' + ' ' + h + ':' + m + ':' + s;
-            $('.attendance').append("  <div> <div style='height: 24px;'></div><div class='time1'>" + time + "</div></div>");
+            if ($('.attendance .detail').length > 2) {
+                $("#da").attr("disabled", true);
+                return;
+            }
+            $('.attendance').append("  <div class='detail'> <div style='height: 24px;'></div><div class='time1'>" + time + "</div></div>");
 
             // $('.time1').html('当前时间:' + year + '年' + mon + '月' + da + '日' + '星期' + day + ' ' + h + ':' + m + ':' + s);
             // }
             // if (code == 2) {
             //     $('.time2').html('当前时间:' + year + '年' + mon + '月' + da + '日' + '星期' + day + ' ' + h + ':' + m + ':' + s);
             // }
+
+
         });
     });
 

@@ -55,7 +55,59 @@ public class AdminController {
 
         ArrayList<Sign> signListDetail = signService.getSignListDetail(user.getId(), day);
         model.addAttribute("signList", signListDetail);
-        System.out.println("singlist: " + signListDetail);
+
+
+//        统计本月 未打卡次数
+//        情况1 不是本月上班
+//        情况2: 是本月上班
+        String inTime = user.getIntime();
+//        2018-05-01 22:13:15
+//        分隔字符串 获取年月日
+
+        String[] splits = inTime.split(" ");
+        String nyrStr = splits[0];
+        String[] nyrArr = nyrStr.split("-");
+
+        int inY = Integer.parseInt(nyrArr[0]);
+        int inM = Integer.parseInt(nyrArr[1]);
+        int inD = Integer.parseInt(nyrArr[2]);
+
+        int nowY = calendar.get(Calendar.YEAR);
+        int nowM = calendar.get(Calendar.MONTH);
+        int nowD = calendar.get(Calendar.DAY_OF_MONTH);
+        int count = 0;
+//        本月入职
+        if (inY == nowY && inM == nowM) {
+
+//            计算入职到现在的应该打卡的次数
+
+//            calendar.set(Calendar.DAY_OF_MONTH, -1);
+//            calendar.set(Calendar.MONTH, inM + 1);
+
+            while (inD <= calendar.get(Calendar.DAY_OF_MONTH)) {
+                int dayWeek = calendar.get(Calendar.DAY_OF_WEEK);
+                if (dayWeek != Calendar.SUNDAY && dayWeek != Calendar.SATURDAY) {
+                    count++;
+                }
+                inD++;
+            }
+
+
+        } else {
+//            不是本月入职
+
+            int nowDay = 1;
+            while (nowDay <= calendar.get(Calendar.DAY_OF_MONTH)) {
+                int dayWeek = calendar.get(Calendar.DAY_OF_WEEK);
+                if (dayWeek != Calendar.SUNDAY && dayWeek != Calendar.SATURDAY) {
+                    count++;
+                }
+                nowDay += 1;
+            }
+        }
+
+//        查询打了多少次卡
+
         return "admin/index";
     }
 

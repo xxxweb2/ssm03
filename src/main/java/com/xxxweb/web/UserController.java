@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 @Controller
 @RequestMapping(value = "user")
@@ -41,6 +43,10 @@ public class UserController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(QfUser qfUser) {
         System.out.println("age: " + qfUser);
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        qfUser.setIntime(df.format(new Date()));
+
         userService.saveUser(qfUser);
         return "redirect:list";
     }
@@ -67,7 +73,6 @@ public class UserController {
 
     @RequestMapping(value = "/update")
     public String update(QfUser qfUser, ModelMap model) {
-
         userService.updateUser(qfUser);
         return "redirect:list";
     }

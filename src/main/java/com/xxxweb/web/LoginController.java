@@ -56,6 +56,7 @@ public class LoginController {
         QfUser user = new QfUser();
         user.setId(1);
         user.setUsername("admin");
+        user.setIntime("2018-05-01 22:13:15");
         session.setAttribute("user", user);
             return "redirect:/admin/index";
 
