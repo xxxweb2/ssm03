@@ -29,4 +29,16 @@ public class SignServiceImpl implements SignService {
     public ArrayList<Sign> getSignListDetail(int id, int day) {
         return signDao.getSignListDetail(id, day);
     }
+
+    public int countDa(int id, int year, int month) {
+        return signDao.countDa(id, year, month);
+    }
+
+    public ArrayList<Sign> daDetail(int id, int year, int month) {
+        return signDao.daDetail(id, year, month);
+    }
+
+    public ArrayList<Sign> todayDaList(int year, int month, int day) {
+        return signDao.todayDaList(year, month, day);
+    }
 }

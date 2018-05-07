@@ -37,6 +37,10 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/index.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
 
+
+    <%--柱状图--%>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css" />
+
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/bootstrap.min.css" />
 
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.js"></script>
@@ -44,21 +48,16 @@
 
     <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/sign.css" />
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/calendar.js"></script>
+
+
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/highcharts.js"></script>
+
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/gray.js"></script>
+
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/main.js"></script>
+
     <script type="text/javascript">
-        $(function() {
-            //ajax获取日历json数据
-            var signList = [{
-                "signDay": "10",
-                "signMonth": "1"
-            }, {
-                "signDay": "11"
-            }, {
-                "signDay": "12"
-            }, {
-                "signDay": "13"
-            }];
-            calUtil.init(signList);
-        });
+
     </script>
 
 </head>

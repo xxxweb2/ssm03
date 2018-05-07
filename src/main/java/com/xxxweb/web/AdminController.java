@@ -43,7 +43,7 @@ public class AdminController {
 
         model.addAttribute("leaveCount", leaveCount);
         model.addAttribute("laterCount", laterCount);
-        model.addAttribute("noClockCount", noClockCount);
+//        model.addAttribute("noClockCount", noClockCount);
 
 
 //        查看打卡情况 在首页显示
@@ -77,15 +77,18 @@ public class AdminController {
         int nowD = calendar.get(Calendar.DAY_OF_MONTH);
         int count = 0;
 //        本月入职
-        if (inY == nowY && inM == nowM) {
+        if (inY == nowY && inM == (nowM + 1)) {
 
 //            计算入职到现在的应该打卡的次数
 
 //            calendar.set(Calendar.DAY_OF_MONTH, -1);
 //            calendar.set(Calendar.MONTH, inM + 1);
-
-            while (inD <= calendar.get(Calendar.DAY_OF_MONTH)) {
+            Calendar calendar2 = Calendar.getInstance();
+            while (inD < calendar2.get(Calendar.DAY_OF_MONTH)) {
+                calendar.set(Calendar.DAY_OF_MONTH, inD);
                 int dayWeek = calendar.get(Calendar.DAY_OF_WEEK);
+
+
                 if (dayWeek != Calendar.SUNDAY && dayWeek != Calendar.SATURDAY) {
                     count++;
                 }
@@ -97,7 +100,9 @@ public class AdminController {
 //            不是本月入职
 
             int nowDay = 1;
-            while (nowDay <= calendar.get(Calendar.DAY_OF_MONTH)) {
+            Calendar calendar2 = Calendar.getInstance();
+            while (nowDay < calendar2.get(Calendar.DAY_OF_MONTH)) {
+                calendar.set(Calendar.DAY_OF_MONTH, nowDay);
                 int dayWeek = calendar.get(Calendar.DAY_OF_WEEK);
                 if (dayWeek != Calendar.SUNDAY && dayWeek != Calendar.SATURDAY) {
                     count++;
@@ -107,7 +112,11 @@ public class AdminController {
         }
 
 //        查询打了多少次卡
-
+        nowM += 1;
+        int daCount = signService.countDa(user.getId(), nowY, nowM);
+        count *= 2;
+        int weiDa = count - daCount;
+        model.addAttribute("noClockCount", weiDa);
         return "admin/index";
     }
 
@@ -157,5 +166,88 @@ public class AdminController {
         sign.setTime(df.format(new Date()));
         signService.insertSign(sign);
         return res;
+    }
+
+    @RequestMapping(value = "/daDetail")
+    @ResponseBody
+    public ArrayList<Integer> daDetail(HttpSession session) {
+
+        ArrayList<Integer> res = new ArrayList<Integer>();
+
+        QfUser user = (QfUser) session.getAttribute("user");
+        Calendar calendar = Calendar.getInstance();
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH) + 1;
+
+        ArrayList<Sign> signList = signService.daDetail(user.getId(), year, month);
+
+        int[] list = new int[signList.size()];
+
+
+        int len = signList.size();
+
+        if (len != 0) {
+
+
+            for (int i = 0; i < len; i++) {
+                Sign sign = signList.get(i);
+                String inTime = sign.getTime();
+//            获取日期
+                String[] split = inTime.split(" ");
+                String[] split1 = split[0].split("-");
+                int day = Integer.parseInt(split1[2]);
+                list[i] = day;
+            }
+        }
+        int nowDay = 1;
+        int listIndex = 0;
+
+        Calendar calendar1 = Calendar.getInstance();
+
+        String inTime = user.getIntime();
+//        2018-05-01 22:13:15
+//        分隔字符串 获取年月日
+
+        String[] splits = inTime.split(" ");
+        String nyrStr = splits[0];
+        String[] nyrArr = nyrStr.split("-");
+
+        int inY = Integer.parseInt(nyrArr[0]);
+        int inM = Integer.parseInt(nyrArr[1]);
+        int inD = Integer.parseInt(nyrArr[2]);
+
+        int nowD = calendar1.get(Calendar.MONTH);
+        nowD++;
+        if (nowD == inM) {
+            nowDay = inD;
+        }
+
+
+        while (nowDay < calendar1.get(Calendar.DAY_OF_MONTH)) {
+
+            calendar.set(Calendar.DAY_OF_MONTH, nowDay);
+            int dayWeek = calendar.get(Calendar.DAY_OF_WEEK);
+
+            if (dayWeek != Calendar.SUNDAY && dayWeek != Calendar.SATURDAY) {
+
+                if (list.length == 0) {
+                    res.add(nowDay);
+                    nowDay += 1;
+                    continue;
+                }
+                if (nowDay == list[listIndex]) {
+                    listIndex++;
+                    if (list.length == listIndex) {
+                        listIndex = listIndex - 1;
+                    }
+                } else {
+                    res.add(nowDay);
+                }
+            }
+            nowDay += 1;
+        }
+        System.out.println("lsit: " + res);
+        return res;
+
     }
 }

@@ -19,4 +19,7 @@ public interface SignDao {
     ArrayList<Sign> getSignListDetail(@Param("id") int id, @Param("day") int day);
 
     int countDa(@Param("id")int id, @Param("year")int year, @Param("month")int month);
+    ArrayList<Sign> daDetail(@Param("id")int id, @Param("year")int year, @Param("month")int month);
+    ArrayList<Sign> todayDaList(@Param("year")int year, @Param("month")int month, @Param("day")int day);
+
 }

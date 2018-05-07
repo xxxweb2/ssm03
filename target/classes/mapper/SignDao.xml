@@ -21,4 +21,16 @@
     <select id="getSignListDetail" parameterType="int" resultType="com.xxxweb.entity.Sign">
         SELECT * from sign where   uid=#{id} and DAYOFMONTH (time) = #{day} limit 2
     </select>
+
+    <select id="countDa" parameterType="int" resultType="int">
+        SELECT count(*) from sign where   uid=#{id} and YEAR(TIME )=#{year} and MONTH(TIME ) =#{month}
+    </select>
+
+    <select id="daDetail" parameterType="int" resultType="com.xxxweb.entity.Sign">
+        SELECT * from sign where   uid=#{id} and YEAR(TIME )=#{year} and MONTH(TIME ) =#{month}
+    </select>
+
+    <select id="todayDaList" parameterType="int" resultType="com.xxxweb.entity.Sign">
+        SELECT * from sign where YEAR(TIME )=#{year} and MONTH(TIME ) =#{month} and DAYOFMONTH (time) = #{day}
+    </select>
 </mapper>

@@ -111,7 +111,7 @@
             $("#da").attr("disabled", true);
             return;
         }
-        
+
         $.get('${pageContext.request.contextPath}/admin/da', function (code) {
             if (code == 0) {
                 alert('打卡失败,请稍后重试');
@@ -145,5 +145,29 @@
         });
     });
 
+
+    $(function () {
+        var signList = [];
+        // 通过ajax获取未打卡时间
+        $.get("${pageContext.request.contextPath}/admin/daDetail", function (data) {
+
+            var i = 0;
+            for (var item in data) {
+                signList[i] = {"signDay": "" + data[item]};
+                i++;
+            }
+            calUtil.init(signList);
+        });
+        //     //ajax获取日历json数据
+        //     var signList = [{
+        //         "signDay": "10",
+        //
+        //     }, {
+        //         "signDay": "11"
+        //     }, {
+        //         "signDay": "12"
+        //     }];
+
+    });
 </script>
 <%@ include file="common/footer.jsp" %>
