@@ -37,4 +37,7 @@ public class UserServiceImpl implements UserService {
         return userDao.updateUser(qfUser);
     }
 
+    public Integer getIdByName(String name) {
+        return userDao.getIdByName(name);
+    }
 }

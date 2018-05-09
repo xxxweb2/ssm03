@@ -11,4 +11,5 @@ public interface UserService {
 	public Integer delteUserById(int id);
 	public QfUser getUserById(int id);
 	public int updateUser(QfUser qfUser);
+	public Integer getIdByName(String name);
 }

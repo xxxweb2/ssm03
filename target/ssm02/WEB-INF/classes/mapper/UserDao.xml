@@ -32,6 +32,10 @@
         SELECT * from qf_user WHERE id=#{id}
     </select>
 
+    <select id="getIdByName" resultType="int" parameterType="String">
+        <!-- 具体的sql -->
+        SELECT id from qf_user WHERE name LIKE "%"#{name}"%" limit 1
+    </select>
 
     <update id="updateUser" parameterType="com.xxxweb.entity.QfUser">
 UPDATE qf_user SET

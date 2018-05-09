@@ -15,5 +15,9 @@ public interface UserDao {
     public Integer delteUserById(int id);
 
     public QfUser getUserById(int id);
+
     public int updateUser(QfUser qfUser);
+
+    //    通过模糊查询 根据姓名查找id
+    public Integer getIdByName(String name);
 }

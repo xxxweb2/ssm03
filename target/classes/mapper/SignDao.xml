@@ -33,4 +33,13 @@
     <select id="todayDaList" parameterType="int" resultType="com.xxxweb.entity.Sign">
         SELECT * from sign where YEAR(TIME )=#{year} and MONTH(TIME ) =#{month} and DAYOFMONTH (time) = #{day}
     </select>
+
+    <select id="getSignByFilter" parameterType="int" resultType="com.xxxweb.entity.Sign">
+        SELECT * from sign where YEAR(TIME )=#{year} and MONTH(TIME ) =#{month} and DAYOFMONTH (time) = #{day} and
+        hour(time)>#{left}
+        and HOUR (time) &lt; #{right}
+          <if test="uid != 0">
+            and uid = #{uid}
+        </if>
+    </select>
 </mapper>

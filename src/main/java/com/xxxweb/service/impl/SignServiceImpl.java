@@ -41,4 +41,9 @@ public class SignServiceImpl implements SignService {
     public ArrayList<Sign> todayDaList(int year, int month, int day) {
         return signDao.todayDaList(year, month, day);
     }
+
+    public ArrayList<Sign> getSignByFilter(int year, int month, int day, int left, int right, int uid) {
+        return signDao.getSignByFilter( year,  month,  day,  left,  right,  uid);
+    }
+
 }
