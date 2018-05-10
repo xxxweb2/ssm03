@@ -92,7 +92,7 @@
                 <a href="${pageContext.request.contextPath}/attend/index"><img src="${pageContext.request.contextPath}/images/kq.png">员工考勤</a>
             </li>
             <li>
-                <a href="#"><img src="${pageContext.request.contextPath}/images/wc.png">外出登记</a>
+                <a href="${pageContext.request.contextPath}/out/index"><img src="${pageContext.request.contextPath}/images/wc.png">外出登记</a>
             </li>
         </ul>
     </div>
