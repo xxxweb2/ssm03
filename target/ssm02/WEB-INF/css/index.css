@@ -158,6 +158,15 @@ a {
 	padding: 10px;
 	background: #FFFFFF;
 }
+
+.right-detail .attendancebtn{
+	box-sizing: border-box;
+	width: 580px;
+	height: 200px;
+	float: right;
+	padding: 10px;
+	background: #FFFFFF;
+}
 .right-detail .attendance h5{
 	font-size: 18px;
 	line-height: 20px;

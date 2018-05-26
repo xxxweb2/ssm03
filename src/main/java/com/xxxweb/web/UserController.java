@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,9 +32,19 @@ public class UserController {
 //        获取所有员工信息
         ArrayList<QfUser> userList = userService.getUserList();
         model.addAttribute("userList", userList);
+        System.out.println(userList);
         return "admin/user/list";
     }
 
+
+    @RequestMapping(value = "/comm")
+    public String comm(ModelMap model) {
+//        获取所有员工信息
+        ArrayList<QfUser> userList = userService.getUserList();
+        model.addAttribute("userList", userList);
+
+        return "admin/user/comm";
+    }
     @RequestMapping(value = "/add")
     public String add(ModelMap model) {
         model.addAttribute("qfuser", new QfUser());
@@ -75,5 +86,14 @@ public class UserController {
     public String update(QfUser qfUser, ModelMap model) {
         userService.updateUser(qfUser);
         return "redirect:list";
+    }
+
+    //    普通员工查看自己信息
+    @RequestMapping(value = "/detail")
+    public String detail(HttpSession session, ModelMap model) {
+        QfUser user = (QfUser) session.getAttribute("user");
+        QfUser user2 = userService.getUserById(user.getId());
+        model.addAttribute("user", user2);
+        return "admin/user/detail";
     }
 }

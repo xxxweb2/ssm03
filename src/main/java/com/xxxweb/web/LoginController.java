@@ -53,35 +53,39 @@ public class LoginController {
             HttpServletRequest request,
             ModelMap model,
             HttpSession session) {
-        QfUser user = new QfUser();
-        user.setId(1);
-        user.setUsername("admin");
-        user.setIntime("2018-05-02 22:13:15");
-        session.setAttribute("user", user);
-            return "redirect:/admin/index";
+//        QfUser user = new QfUser();
+//        user.setId(1);
+//        user.setUsername("admin");
+//        user.setIntime("2018-05-02 22:13:15");
+//        session.setAttribute("user", user);
+//            return "redirect:/admin/index";
 
-//
-//        //判断密码是否正确
-//        String pwd = loginService.getPassword(username);
-//        if (pwd.equals(password)) {
-////            登陆成功
-//            session.setAttribute("name", username);
-//            model.addAttribute("username", username);
-//
-////            跳转到邮件验证码界面
-//
-//            return "redirect:email";
-////            return "admin/index";
-//        } else {
-//            model.addAttribute("error", "账号或者密码错误");
-//            return "admin/login";
-//        }
+
+        //判断密码是否正确
+        String pwd = loginService.getPassword(username);
+        if (password.equals(pwd)) {
+//            登陆成功
+            session.setAttribute("name", username);
+            model.addAttribute("username", username);
+
+//            跳转到邮件验证码界面
+
+            return "redirect:email";
+//            return "admin/index";
+        } else {
+            model.addAttribute("error", "账号或者密码错误");
+            return "admin/login";
+        }
 
     }
 
     //    @RequestParam(value = "username") String username,
     @RequestMapping(value = "/email", method = RequestMethod.GET)
-    public String email(HttpSession session) {
+    public String email(HttpSession session, @RequestParam(value = "error", defaultValue = "") String error, ModelMap model) {
+
+        if (!error.equals("")) {
+            model.addAttribute("error");
+        }
 //        发送验证码 并且存入session中 用于验证时用
 
         try {
@@ -91,7 +95,11 @@ public class LoginController {
             code = code * 10 + (int) (Math.random() * 10);
             code = code * 10 + (int) (Math.random() * 10);
             session.setAttribute("email", code);
-            emaielUtils.sendEmail2("1070529431@qq.com", "系统登陆验证码", "验证码为: " + code);
+            String username = (String) session.getAttribute("name");
+            QfUser userByName = userService.getUserByName(username);
+            session.setAttribute("qfuser", userByName);
+
+            emaielUtils.sendEmail2(userByName.getEmail(), "系统登陆验证码", "验证码为: " + code);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -100,28 +108,20 @@ public class LoginController {
 
     @RequestMapping(value = "/checkEmail", method = RequestMethod.POST)
     public String checkEmail(@RequestParam(value = "email") String email, ModelMap model, HttpServletRequest request, HttpSession session) {
-        String realEmail = ""+session.getAttribute("email");
-        System.out.println("email: " + email);
-        System.out.println("realemail: " + realEmail);
+        String realEmail = "" + session.getAttribute("email");
         if (realEmail.equals(email)) {
-            System.out.println("true");
-            String username = (String) session.getAttribute("name");
-
-            QfUser userByName = userService.getUserByName(username);
-            session.setAttribute("user", userByName);
-
+            QfUser user = (QfUser) session.getAttribute("qfuser");
+            session.setAttribute("user", user);
             return "redirect:/admin/index";
         }
-        System.out.println("false");
         model.addAttribute("error", "邮箱验证码错误");
-
         return "redirect:email";
     }
 
     //    安全退出
     @RequestMapping(value = "/logout")
     public String logOut(HttpSession session) {
-        session.setAttribute("username", null);
+        session.setAttribute("user", null);
         return "redirect:index";
     }
 }

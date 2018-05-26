@@ -4,7 +4,7 @@
 
 <div class="right-detail">
     <h3 style="float: left">员工信息</h3>
-    <a href="${pageContext.request.contextPath}/user/add" style="float: right;margin-top: 25px;">添加</a>
+    <a href="${pageContext.request.contextPath}/user/add" style="color: #000000; float: right;margin-top: 25px;">添加</a>
     <table class="table table-striped table-hover">
 
         <tr>
@@ -21,13 +21,14 @@
             <tr id="tr${item.id}">
                 <td>${item.id}</td>
                 <td>${item.name}</td>
-                <td>${item.position_id}</td>
+                <td>${item.positionid}</td>
                 <td>${item.job}</td>
                 <td>${item.tel}</td>
                 <td>${item.state}</td>
                 <td>
-                    <a href="${pageContext.request.contextPath}/user/edit?id=${item.id}" class="glyphicon glyphicon-ok"></a>
-                    <a href="#" data-index="${item.id}" class="del glyphicon glyphicon-remove"></a>
+                    <a style="color: blue;" href="${pageContext.request.contextPath}/user/edit?id=${item.id}"
+                       class="glyphicon glyphicon-ok"></a>
+                    <span href="#" data-index="${item.id}" class="del glyphicon glyphicon-remove"></span>
                 </td>
             </tr>
         </c:forEach>

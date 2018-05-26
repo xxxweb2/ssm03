@@ -16,5 +16,9 @@ public interface OutDao {
     int updateJlqz(int id);
 
     int updateBack(@Param("id") int id, @Param("time") String time);
+
+    int getNoDo();
+    ArrayList<Out> getMinmeOutList(int id);
+    ArrayList<Out> getAllOutListByWeight(int weight);
 }
 

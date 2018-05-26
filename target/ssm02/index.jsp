@@ -5,6 +5,8 @@
     <meta charset="utf-8">
 </head>
 <body>
-<jsp:forward page="/index"/>
+<script type="text/javascript">
+    window.location.href = "${pageContext.request.contextPath}/login/index";
+</script>
 </body>
 </html>

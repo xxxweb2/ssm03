@@ -50,7 +50,7 @@
     </bean>
 
     <!--配置拦截器-->
-    <!--<mvc:interceptors>-->
+    <mvc:interceptors>
         <!--<mvc:interceptor>-->
             <!--<mvc:mapping path="/system/*"/>-->
 
@@ -62,18 +62,10 @@
             <!--<bean class="com.xxxweb.web.MyInterceptor"/>-->
         <!--</mvc:interceptor>-->
 
-        <!--<mvc:interceptor>-->
-            <!--<mvc:mapping path="/index"/>-->
-            <!--<mvc:mapping path="/contact"/>-->
-            <!--<mvc:mapping path="/news"/>-->
-            <!--<mvc:mapping path="/news/*"/>-->
-            <!--<mvc:mapping path="/message"/>-->
-            <!--<mvc:mapping path="/company"/>-->
-            <!--<mvc:mapping path="/product/*/*"/>-->
-            <!--<mvc:mapping path="/product/*"/>-->
-            <!--<bean class="com.xxxweb.web.IndexInterceptor"/>-->
-        <!--</mvc:interceptor>-->
-
-    <!--</mvc:interceptors>-->
+        <mvc:interceptor>
+            <mvc:mapping path="/*/*"/>
+            <bean class="com.xxxweb.web.IndexInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 </beans>

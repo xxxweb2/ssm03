@@ -1,30 +1,20 @@
 package com.xxxweb.entity;
 
 public class QfUser {
+    public int weight;
+
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
     public int getId() {
         return id;
     }
 
-    @Override
-    public String toString() {
-        return "QfUser{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-
-                ", name='" + name + '\'' +
-                ", edu='" + edu + '\'' +
-                ", sex=" + sex +
-                ", professional='" + professional + '\'' +
-                ", age=" + age +
-                ", marriage=" + marriage +
-                ", tel='" + tel + '\'' +
-                ", cardid='" + cardid + '\'' +
-                ", position_id=" + position_id +
-                ", job='" + job + '\'' +
-                ", intime='" + intime + '\'' +
-                ", state=" + state +
-                '}';
-    }
 
     public void setId(int id) {
         this.id = id;
@@ -97,13 +87,6 @@ public class QfUser {
         this.cardid = cardid;
     }
 
-    public int getPosition_id() {
-        return position_id;
-    }
-
-    public void setPosition_id(int position_id) {
-        this.position_id = position_id;
-    }
 
     public String getJob() {
         return job;
@@ -159,9 +142,36 @@ public class QfUser {
     private int marriage;
     private String tel;
     private String cardid;
-    private int position_id;
+    private int positionid;
     private String job;
+
+    public int getPositionid() {
+        return positionid;
+    }
+
+    public void setPositionid(int positionid) {
+        this.positionid = positionid;
+    }
+
     private String intime;
     private int state;
+    private String ip;
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getIp() {
+        return ip;
+    }
+
+    public void setIp(String ip) {
+        this.ip = ip;
+    }
 
 }

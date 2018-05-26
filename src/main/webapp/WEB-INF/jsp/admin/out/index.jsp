@@ -127,7 +127,7 @@
     <table class="table table-hover">
 
         <tr>
-            <th>提交时间</th>
+            <%--<th>提交时间</th>--%>
             <th>申请人</th>
             <th>被访人</th>
             <th>外出地址</th>
@@ -140,7 +140,7 @@
         </tr>
         <c:forEach items="${requestScope.get('list')}" var="item">
             <tr id="tr${item.id}">
-                <td>${item.comtime}</td>
+                <%--<td>${item.comtime}</td>--%>
                 <td>${item.name}</td>
                 <td>${item.bfr}</td>
                 <td>${item.addr}</td>
@@ -150,8 +150,22 @@
                 <td class="jl${item.id}">${item.jlqz}</td>
                 <td class="f${item.id}">${item.ftime}</td>
                 <td>
-                    <span href="${pageContext.request.contextPath}/user/edit?id=${item.id}"
-                       class="glyphicon glyphicon-ok sign"></span>
+<%--uid--%>
+
+    <c:choose>
+
+
+    <c:when test="${item.uid==userid}">
+                    <span class="glyphicon glyphicon-pushpin back" data-index="${item.id}"></span>
+    </c:when>
+    </c:choose>
+                    <c:choose>
+                        <c:when test="${weight>1}">
+                    <span class="glyphicon glyphicon-ok deal" data-index="${item.id}"></span>
+
+                        </c:when>
+
+                    </c:choose>
                     <span href="#" data-index="${item.id}" class="del glyphicon glyphicon-remove"></span>
                 </td>
             </tr>
@@ -193,12 +207,14 @@
             $("#tr" + id).remove();
         });
     });
-    $('.sign').on('click', function () {
-        var id = $(this).attr('data-index');
-        $.get('${pageContext.request.contextPath}/out/<c:choose><c:when test="${isRen==1}">sign</c:when><c:otherwise>pback</c:otherwise></c:choose>?id=' + id, function (data) {
-            alert('操作成功');
-            var where = ${isRen};
 
+    // 回来时间
+    // back
+
+    $('.back').on('click', function () {
+        var id = $(this).attr('data-index');
+        $.get('${pageContext.request.contextPath}/out/pback?id='+id, function () {
+            alert('操作成功');
             var myDate = new Date();
             var year = myDate.getFullYear();
             var month = myDate.getMonth();
@@ -208,15 +224,46 @@
             var h = myDate.getHours();
             var m = myDate.getMinutes();
             var s = myDate.getSeconds();
-
-
-            if (where == 1) {
-                $(".jl" + id).html("经理签字");
-            } else {
-                $(".f" + id).html(year + "-" + month + "-" + day + " " + h + ":" + m + ":" + s);
-            }
+            $(".f" + id).html(year + "-" + month + "-" + day + " " + h + ":" + m + ":" + s);
         });
     });
+
+
+
+    $('.deal').on('click', function () {
+        var id = $(this).attr('data-index');
+        $.get('${pageContext.request.contextPath}/out/sign?id='+id, function () {
+            alert('操作成功');
+            $(".jl" + id).html("已签字");
+        });
+    });
+    // 经理签字
+    // deal
+
+    <%--$('.sign').on('click', function () {--%>
+        <%--var id = $(this).attr('data-index');--%>
+        <%--$.get('${pageContext.request.contextPath}/out/<c:choose><c:when test="${isRen!=1}">sign</c:when><c:otherwise>pback</c:otherwise></c:choose>?id=' + id, function (data) {--%>
+            <%--alert('操作成功');--%>
+            <%--var where = ${weight};--%>
+
+            <%--var myDate = new Date();--%>
+            <%--var year = myDate.getFullYear();--%>
+            <%--var month = myDate.getMonth();--%>
+            <%--var day = myDate.getDate();--%>
+            <%--month += 1;--%>
+
+            <%--var h = myDate.getHours();--%>
+            <%--var m = myDate.getMinutes();--%>
+            <%--var s = myDate.getSeconds();--%>
+
+
+            <%--if (where == 1) {--%>
+                <%--$(".jl" + id).html("已签字");--%>
+            <%--} else {--%>
+                <%--$(".f" + id).html(year + "-" + month + "-" + day + " " + h + ":" + m + ":" + s);--%>
+            <%--}--%>
+        <%--});--%>
+    <%--});--%>
 </script>
 
 <%@ include file="../common/footer.jsp" %>

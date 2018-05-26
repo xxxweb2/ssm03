@@ -10,4 +10,7 @@ public interface OutService {
     public int delOutById(int id);
     int updateJlqz(int id);
     int updateBack(int id, String time);
+    int getNoDo();
+    ArrayList<Out> getMinmeOutList(int id);
+    ArrayList<Out> getAllOutListByWeight(int weight);
 }

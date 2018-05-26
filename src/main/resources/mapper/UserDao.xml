@@ -12,8 +12,8 @@
 
     <!--插入数据-->
     <insert id="saveUser" parameterType="com.xxxweb.entity.QfUser">
-        insert into qf_user (`username`,`password`,`name`,`edu`,`sex`,`professional`,`age`,`marriage`,`tel`,`cardid`,`position_id`,`job`,`intime`,`state`)
-        values(#{username},#{password},#{name},#{edu},#{sex},#{professional},#{age},#{marriage},#{tel},#{cardid},#{position_id},#{job},#{intime},#{state});
+        insert into qf_user (`username`,`password`,`name`,`edu`,`sex`,`professional`,`age`,`marriage`,`tel`,`cardid`,`positionid`,`job`,`intime`,`state`,`ip`,`email`)
+        values(#{username},#{password},#{name},#{edu},#{sex},#{professional},#{age},#{marriage},#{tel},#{cardid},#{positionid},#{job},#{intime},#{state},#{ip},#{email});
     </insert>
 
 
@@ -52,8 +52,16 @@ cardid=#{cardid},
 position_id=#{position_id},
 job=#{job},
 intime=#{intime},
-state=#{state}
+state=#{state},
+ip=#{ip},
+email=#{email}
  WHERE id=#{id}
     </update>
 
+
+
+    <select id="getAllOutListByWeight" resultType="com.xxxweb.entity.QfUser" parameterType="int">
+        <!-- 具体的sql -->
+        SELECT * from qf_user WHERE weight=#{weight}
+    </select>
 </mapper>

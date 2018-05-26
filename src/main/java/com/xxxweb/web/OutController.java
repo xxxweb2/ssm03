@@ -27,8 +27,25 @@ public class OutController {
     @RequestMapping(value = "index")
     public String index(ModelMap model, HttpSession session) {
         model.addAttribute("out", null);
+
+//        如果用户权重为1只能查看自己的外出登记
+//        如果用户的权重为2能查看权重《=2的外出登记
+
+        QfUser user = (QfUser) session.getAttribute("user");
+
+        int weight = user.getWeight();
+        ArrayList<Out> outList;
+        if (weight == 1) {
+//            权重是1代表普通员工 只能查看自己的外出登记
+
+            outList = outService.getMinmeOutList(user.getId());
+        } else {
+            weight++;
+            outList = outService.getAllOutListByWeight(weight);
+        }
 //        获取所有外出记录
-        ArrayList<Out> outList = outService.getOutList();
+//        ArrayList<Out> outList = outService.getOutList();
+
 
         int len = outList.size();
         for (int i = 0; i < len; i++) {
@@ -38,26 +55,28 @@ public class OutController {
         }
         model.addAttribute("list", outList);
 
-
-        QfUser user = (QfUser) session.getAttribute("user");
         int id = user.getId();
-        int positionId = user.getPosition_id();
-        if (positionId == 0) {
-//            人事
-            model.addAttribute("isRen", 1);
-        } else {
-//            其他员工
-            model.addAttribute("isRen", 0);
-        }
+        int positionId = user.getPositionid();
+
+        weight--;
+        model.addAttribute("weight", weight);
+
         return "admin/out/index";
     }
 
+
+    //    保存外出登记记录 权重为1 是员工的外出登记 权重为2是部门经理的外出登记 权重为3是认识 权重是4为总经理
     @RequestMapping(value = "save")
     public String save(ModelMap model, Out out, HttpSession session) {
         model.addAttribute("out", null);
         QfUser user = (QfUser) session.getAttribute("user");
         int id = user.getId();
+
+//        获取权重
+        int weight = user.getWeight();
+
         out.setUid(id);
+        out.setWeight(weight);
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         out.setComtime(df.format(new Date()));
         outService.saveOut(out);
@@ -83,9 +102,13 @@ public class OutController {
     @RequestMapping(value = "pback")
     @ResponseBody
     public int pback(@Param("id") int id) {
+        System.out.println("id: " + id);
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String time = df.format(new Date());
+        System.out.println("time: " + time);
         outService.updateBack(id, time);
         return 0;
     }
+
+
 }

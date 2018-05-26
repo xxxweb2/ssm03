@@ -18,10 +18,13 @@ public interface SignDao {
 
     ArrayList<Sign> getSignListDetail(@Param("id") int id, @Param("day") int day);
 
-    int countDa(@Param("id")int id, @Param("year")int year, @Param("month")int month);
-    ArrayList<Sign> daDetail(@Param("id")int id, @Param("year")int year, @Param("month")int month);
-    ArrayList<Sign> todayDaList(@Param("year")int year, @Param("month")int month, @Param("day")int day);
+    int countDa(@Param("id") int id, @Param("year") int year, @Param("month") int month);
 
-    ArrayList<Sign> getSignByFilter(@Param("year")int year,@Param("month")int month,@Param("day")int day,@Param("left")int left,@Param("right")int right,@Param("uid")int uid);
+    ArrayList<Sign> daDetail(@Param("id") int id, @Param("year") int year, @Param("month") int month);
 
+    ArrayList<Sign> todayDaList(@Param("year") int year, @Param("month") int month, @Param("day") int day);
+
+    ArrayList<Sign> getSignByFilter(@Param("year") int year, @Param("month") int month, @Param("day") int day, @Param("left") int left, @Param("right") int right, @Param("uid") int uid);
+
+    int getSignCountById(int id);
 }

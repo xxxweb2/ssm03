@@ -2,6 +2,7 @@ package com.xxxweb.web;
 
 import com.xxxweb.entity.QfUser;
 import com.xxxweb.entity.Sign;
+import com.xxxweb.service.OutService;
 import com.xxxweb.service.SignService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,7 +10,10 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -21,7 +25,8 @@ public class AdminController {
 
     @Autowired
     SignService signService;
-
+    @Autowired
+    OutService outService;
 
     @RequestMapping(value = "/index")
     public String index(ModelMap model, HttpSession session) {
@@ -117,12 +122,45 @@ public class AdminController {
         count *= 2;
         int weiDa = count - daCount;
         model.addAttribute("noClockCount", weiDa);
+
+//        查询自己外出登记次数
+
+        int id = user.getId();
+        int signCount = signService.getSignCountById(id);
+        model.addAttribute("signCount", signCount);
+
+
+//        如果人事账号登陆 查询待处理事件的数量
+        int position_id = user.getPositionid();
+        if (position_id == 0) {
+            int noDoCount = outService.getNoDo();
+            model.addAttribute("noDoCount", noDoCount);
+        }
+
         return "admin/index";
     }
 
     @RequestMapping(value = "/da")
     @ResponseBody
-    public int da(HttpSession session) {
+    public int da(HttpSession session, HttpServletRequest request) {
+        QfUser user = (QfUser) session.getAttribute("user");
+//        获取id 如果id为1 则不进行验证
+//否则验证ip
+        String realIp = "";
+        try {
+            realIp = AdminController.getIpAddr(request);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        String userIp = user.getIp();
+        System.out.println("ip: " + userIp);
+        System.out.println("realip:" + realIp);
+        if (user.getId() != 1 && !userIp.equals(realIp)) {
+            return 9;
+        }
+
         int res = 0;
 //        8 点之前打卡 正常
 
@@ -133,8 +171,8 @@ public class AdminController {
 
         Sign sign = new Sign();
 //            session.setAttribute("user", userByName);
-        QfUser user = (QfUser) session.getAttribute("user");
-        hour = 9;
+
+
         if (hour < 8) {
             //            正常早到打卡
             sign.setState(0);
@@ -168,6 +206,55 @@ public class AdminController {
         return res;
     }
 
+
+    private static final String getIpAddr(final HttpServletRequest request)
+            throws Exception {
+        String ip = request.getHeader("X-Forwarded-For");
+        if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+            if (ip == null || ip.length() == 0
+                    || "unknown".equalsIgnoreCase(ip)) {
+                ip = request.getHeader("Proxy-Client-IP");
+            }
+            if (ip == null || ip.length() == 0
+                    || "unknown".equalsIgnoreCase(ip)) {
+                ip = request.getHeader("WL-Proxy-Client-IP");
+            }
+            if (ip == null || ip.length() == 0
+                    || "unknown".equalsIgnoreCase(ip)) {
+                ip = request.getHeader("HTTP_CLIENT_IP");
+            }
+            if (ip == null || ip.length() == 0
+                    || "unknown".equalsIgnoreCase(ip)) {
+                ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+            }
+            if (ip == null || ip.length() == 0
+                    || "unknown".equalsIgnoreCase(ip)) {
+                ip = request.getRemoteAddr();
+            }
+        } else if (ip.length() > 15) {
+            String[] ips = ip.split(",");
+            for (int index = 0; index < ips.length; index++) {
+                String strIp = (String) ips[index];
+                if (!("unknown".equalsIgnoreCase(strIp))) {
+                    ip = strIp;
+                    break;
+                }
+            }
+        }
+        if (ip.equals("127.0.0.1")) {
+            InetAddress inetAddress = null;
+            try {
+                inetAddress = InetAddress.getLocalHost();
+            } catch (UnknownHostException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+            ip = inetAddress.getHostAddress();
+        }
+        return ip;
+    }
+
+
     @RequestMapping(value = "/daDetail")
     @ResponseBody
     public ArrayList<Integer> daDetail(HttpSession session) {
@@ -180,6 +267,7 @@ public class AdminController {
         int month = calendar.get(Calendar.MONTH) + 1;
 
         ArrayList<Sign> signList = signService.daDetail(user.getId(), year, month);
+
 
         int[] list = new int[signList.size()];
 
@@ -246,8 +334,9 @@ public class AdminController {
             }
             nowDay += 1;
         }
-        System.out.println("lsit: " + res);
+
         return res;
 
     }
+
 }

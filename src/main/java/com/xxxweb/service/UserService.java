@@ -12,4 +12,5 @@ public interface UserService {
 	public QfUser getUserById(int id);
 	public int updateUser(QfUser qfUser);
 	public Integer getIdByName(String name);
+	ArrayList<QfUser> getAllUserByWeight(int weight);
 }

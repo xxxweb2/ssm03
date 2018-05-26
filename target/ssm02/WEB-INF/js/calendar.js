@@ -120,8 +120,8 @@ var calUtil = {
    var htmls = new Array();
    htmls.push("<div class='sign_main' id='sign_layer'>");
    htmls.push("<div class='sign_succ_calendar_title'>");
-   htmls.push("<div class='calendar_month_next'>下月</div>");
-   htmls.push("<div class='calendar_month_prev'>上月</div>");
+   // htmls.push("<div class='calendar_month_next'>下月</div>");
+   // htmls.push("<div class='calendar_month_prev'>上月</div>");
    htmls.push("<div class='calendar_month_span'></div>");
    htmls.push("</div>");
    htmls.push("<div class='sign' id='sign_cal'>");

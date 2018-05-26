@@ -33,4 +33,16 @@ public class OutServiceImpl implements OutService {
         return outDao.updateBack(id, time);
     }
 
+    public int getNoDo() {
+        return outDao.getNoDo();
+    }
+
+    public ArrayList<Out> getMinmeOutList(int id) {
+        return outDao.getMinmeOutList(id);
+    }
+
+    public ArrayList<Out> getAllOutListByWeight(int weight) {
+        return outDao.getAllOutListByWeight(weight);
+    }
+
 }

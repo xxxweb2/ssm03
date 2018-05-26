@@ -40,4 +40,9 @@ public class UserServiceImpl implements UserService {
     public Integer getIdByName(String name) {
         return userDao.getIdByName(name);
     }
+
+    public ArrayList<QfUser> getAllUserByWeight(int weight) {
+        return userDao.getAllOutListByWeight(weight);
+    }
+
 }

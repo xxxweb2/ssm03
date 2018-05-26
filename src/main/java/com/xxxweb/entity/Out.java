@@ -1,7 +1,15 @@
 package com.xxxweb.entity;
 
 public class Out {
+    public int weight;
 
+    public int getWeight() {
+        return weight;
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
     private String name;
 
     public String getName() {

@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="common/header.jsp" %>
 <style>
-    .right-detail .attendance .time1, .right-detail .attendance .time2 {
+    .right-detail .attendancebtn .time1, .right-detail .attendancebtn .time2 {
         width: 310px;
         height: 50px;
         background: #fbeeff;
@@ -17,12 +17,27 @@
     <div class="event">
         <h5>待处理事件</h5>
         <div class="left">
-            <p><span>8</span>条</p>
+
+            <p><span>  <c:choose>
+                <c:when test="${noDoCount==null}">
+                    0
+                </c:when>
+                <c:otherwise>
+                    ${noDoCount}
+                </c:otherwise>
+            </c:choose></span>条</p>
             <p>待审核事件</p>
         </div>
         <div class="line"></div>
         <div class="right">
-            <p><span>8</span>条</p>
+            <p><span><c:choose>
+                <c:when test="${noDoCount==null}">
+                    0
+                </c:when>
+                <c:otherwise>
+                    ${noDoCount}
+                </c:otherwise>
+            </c:choose></span>条</p>
             <p>待处理事件</p>
         </div>
 
@@ -70,7 +85,15 @@
                 <p>早退</p>
             </li>
             <li style="background: #eaa4fd;">
-                <p><span>10</span>次</p>
+
+                <p><span> <c:choose>
+                    <c:when test="${leaveCount==null}">
+                        0
+                    </c:when>
+                    <c:otherwise>
+                        ${signCount}
+                    </c:otherwise>
+                </c:choose></span>次</p>
                 <p>外出</p>
             </li>
         </ul>
@@ -83,8 +106,8 @@
 
     </div>
 
-    <div class="attendance qian" style="margin-top: 30px; height: 330px;">
-        <a href="#" id="da" style="margin-top: 35px;">签到打卡</a>
+    <div class="attendancebtn qian" style="margin-top: 30px; height: 330px;">
+        <button id="da" style="margin-top: 35px;margin-left: 205px;">签到打卡</button>
         <div class="num clearfloat">
             <p></p><span>2次</span>
             <p></p>
@@ -107,7 +130,7 @@
 </div>
 <script type="text/javascript">
     $('#da').on('click', function () {
-        if ($('.attendance .detail').length > 1) {
+        if ($('.attendancebtn .detail').length > 1) {
             $("#da").attr("disabled", true);
             return;
         }
@@ -115,6 +138,9 @@
         $.get('${pageContext.request.contextPath}/admin/da', function (code) {
             if (code == 0) {
                 alert('打卡失败,请稍后重试');
+                return;
+            } else if (code == 9) {
+                alert('请在自己的电脑打卡');
                 return;
             }
 
@@ -128,12 +154,12 @@
             var s = date.getSeconds(); //获取秒
             var d = document.getElementById('Date');
 
-            var time = year + '年' + mon + '月' + da + '日' + ' ' + h + ':' + m + ':' + s;
-            if ($('.attendance .detail').length > 2) {
+            var time = year + '-' + mon + '-' + da + '-' + ' ' + h + ':' + m + ':' + s;
+            if ($('.attendancebtn .detail').length > 2) {
                 $("#da").attr("disabled", true);
                 return;
             }
-            $('.attendance').append("  <div class='detail'> <div style='height: 24px;'></div><div class='time1'>" + time + "</div></div>");
+            $('.attendancebtn').append("  <div class='detail'> <div style='height: 24px;'></div><div class='time1'>" + time + "</div></div>");
 
             // $('.time1').html('当前时间:' + year + '年' + mon + '月' + da + '日' + '星期' + day + ' ' + h + ':' + m + ':' + s);
             // }
@@ -151,11 +177,12 @@
         // 通过ajax获取未打卡时间
         $.get("${pageContext.request.contextPath}/admin/daDetail", function (data) {
 
-            var i = 0;
-            for (var item in data) {
-                signList[i] = {"signDay": "" + data[item]};
-                i++;
-            }
+                var i = 0;
+                for (var item in data) {
+                    signList[i] = {"signDay": "" + data[item]};
+                    i++;
+                }
+
             calUtil.init(signList);
         });
         //     //ajax获取日历json数据

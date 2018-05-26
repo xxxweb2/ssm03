@@ -19,7 +19,7 @@
             <label >姓名</label>
             <input name="name" type="text" class="form-control" placeholder="姓名">
         </div>
--------------
+
                <div class="form-group">
             <label >学历</label>
             <input name="edu" type="text" class="form-control" placeholder="学历">
@@ -54,7 +54,7 @@
                 <option value="1">已婚</option>
             </select>
         </div>
-       -----------
+
         <div class="form-group">
             <label >电话</label>
             <input name="tel" type="text" class="form-control" placeholder="电话">
@@ -63,29 +63,43 @@
             <label >身份证号</label>
             <input name="cardid" type="text" class="form-control" placeholder="专业">
         </div>
-        <h2>岗位信息</h2>
+
         <div class="form-group">
-            <label for="exampleInputEmail1">部门</label>
-            <select name="position_id" class="form-control" style="width: 50%;">
-                <option value="0">人事</option>
-                <option value="1">设计</option>
+            <label for="">部门</label>
+            <select name="job" class="form-control" style="width: 50%;">
+                <option value="1">技术部</option>
+                <option value="2">人事部</option>
+                <option value="3">销售部</option>
             </select>
         </div>
 
+
         <div class="form-group">
-            <label for="exampleInputEmail1">职位</label>
+            <label for="">级别</label>
+            <select name="weight" class="form-control" style="width: 50%;">
+                <option value="0">普通员工</option>
+                <option value="1">部门经理</option>
+            </select>
+        </div>
+
+
+        <div class="form-group">
+            <label for="">职位</label>
             <input name="job" type="text" class="form-control" id="" placeholder="专业">
         </div>
 
         <div class="form-group">
-            <label for="exampleInputEmail1">状态</label>
+            <label for="">状态</label>
             <select name="state" class="form-control" style="width: 50%;">
                 <option value="0">实习</option>
                 <option value="1">正式</option>
                 <option value="1">离职</option>
             </select>
         </div>
-
+        <div class="form-group">
+            <label for="">ip</label>
+            <input name="ip" type="text" class="form-control" placeholder="ip">
+        </div>
 
         <input type="submit" class="btn btn-success" value="提交">
         <input type="reset" class="btn btn-warning" value="重置">

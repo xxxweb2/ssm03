@@ -47,5 +47,4 @@ public class Sign {
     private int state;
     private int position;
 
-
 }

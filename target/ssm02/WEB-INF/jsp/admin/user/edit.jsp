@@ -81,17 +81,17 @@
         <h2>岗位信息</h2>
         <div class="form-group">
             <label for="exampleInputEmail1">部门</label>
-            <select name="position_id" class="form-control" style="width: 50%;">
+            <select name="positionid" class="form-control" style="width: 50%;">
                 <option
                         <c:choose>
-                            <c:when test="${user.position_id==0}">
+                            <c:when test="${user.positionid==0}">
                                 selected
                             </c:when>
                         </c:choose>
                         value="0">人事</option>
                 <option value="1"
                         <c:choose>
-                            <c:when test="${user.position_id==1}">
+                            <c:when test="${user.positionid==1}">
                                 selected
                             </c:when>
                         </c:choose>>设计</option>
@@ -100,7 +100,7 @@
 
         <div class="form-group">
             <label for="exampleInputEmail1">职位</label>
-            <input value="${user.job}" name="job" type="text" class="form-control" id="" placeholder="专业">
+            <input value="${user.job}" name="job" type="text" class="form-control" placeholder="专业">
         </div>
         <div class="form-group">
             <label for="exampleInputEmail1">入职时间</label>
@@ -129,7 +129,10 @@
                         value="2">离职</option>
             </select>
         </div>
-
+        <div class="form-group">
+            <label for="exampleInputEmail1">ip</label>
+            <input  value="${user.ip}"  type="text" class="form-control" id="" placeholder="ip">
+        </div>
 
         <input type="submit" class="btn btn-success" value="提交">
         <input type="reset" class="btn btn-warning" value="重置">

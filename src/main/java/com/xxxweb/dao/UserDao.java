@@ -20,4 +20,5 @@ public interface UserDao {
 
     //    通过模糊查询 根据姓名查找id
     public Integer getIdByName(String name);
+    ArrayList<QfUser> getAllOutListByWeight(int weight);
 }

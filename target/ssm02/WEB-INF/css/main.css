@@ -21,9 +21,7 @@ header a, a:visited {
     text-decoration:none;
     color:#fcfcfc;
 }
-body {
-    background:url("background.jpg") no-repeat scroll top center transparent;
-}
+
 .actions, .chart {
     margin: 15px auto;
     width: 820px;

@@ -38,8 +38,12 @@
         SELECT * from sign where YEAR(TIME )=#{year} and MONTH(TIME ) =#{month} and DAYOFMONTH (time) = #{day} and
         hour(time)>#{left}
         and HOUR (time) &lt; #{right}
-          <if test="uid != 0">
+        <if test="uid != 0">
             and uid = #{uid}
         </if>
+    </select>
+
+    <select id="getSignCountById" parameterType="int" resultType="int">
+        SELECT COUNT(*) from sign where id=#{id}
     </select>
 </mapper>

@@ -7,7 +7,7 @@
     <title>欢迎登陆后台</title>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.png">
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/common.js"></script>
+    <%--<script type="text/javascript" src="${pageContext.request.contextPath}/js/common.js"></script>--%>
     <style type="text/css">
         * {
             margin: 0;
@@ -16,7 +16,7 @@
         }
 
         body {
-            background: url('${pageContext.request.contextPath}/images/bodybg.jpg') repeat-x;
+            background: url('${pageContext.request.contextPath}/images/bg.jpg') repeat-x;
             font-family: "microsoft yahei";
             font-size: 14px;
         }

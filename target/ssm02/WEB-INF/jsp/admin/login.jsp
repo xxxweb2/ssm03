@@ -7,7 +7,7 @@
     <title>欢迎登陆后台</title>
     <link rel="shortcut icon" href="${pageContext.request.contextPath}/images/favicon.png">
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/common.js"></script>
+
     <style type="text/css">
         * {
             margin: 0;
@@ -16,7 +16,7 @@
         }
 
         body {
-            background: url('${pageContext.request.contextPath}/images/bodybg.jpg') repeat-x;
+            background: url('${pageContext.request.contextPath}/images/bg.jpg') repeat-x;
             font-family: "microsoft yahei";
             font-size: 14px;
         }
@@ -60,7 +60,7 @@
         }
 
         #username, #password {
-            background: url('${pageContext.request.contextPath}/images/inputbg.jpg') no-repeat;
+            <%--background: url('${pageContext.request.contextPath}/images/bg.jpg') no-repeat;--%>
             width: 200px;
             height: 30px;
             line-height: 30px;
@@ -159,7 +159,7 @@
                 </li>
 
                 <li id="sub"><input style="float: left;margin-left: 46px" type="submit" name="ok" id="ok" value="登陆">
-                    <a href="#" style="line-height: 33px; margin-left: 20px; color: rgb(177,0,0);text-decoration: none;font-size: 12px;">忘记密码</a>
+                    <%--<a href="#" style="line-height: 33px; margin-left: 20px; color: rgb(177,0,0);text-decoration: none;font-size: 12px;">忘记密码</a>--%>
                 </li>
             </ul>
         </div>

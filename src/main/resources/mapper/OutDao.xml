@@ -6,7 +6,7 @@
     <!-- 目的：为dao接口方法提供sql语句配置 -->
 
     <insert id="saveOut" parameterType="com.xxxweb.entity.Out">
-        insert into qf_out (`bfr`,`btel`,`addr`,`wtime`,`wrea`,`uid`) values(#{bfr},#{btel},#{addr},#{wtime},#{wrea},#{uid});
+        insert into qf_out (`bfr`,`btel`,`addr`,`wtime`,`wrea`,`uid`,`weight`) values(#{bfr},#{btel},#{addr},#{wtime},#{wrea},#{uid},#{weight});
     </insert>
     <select id="getOutList" resultType="com.xxxweb.entity.Out">
         select * from qf_out ORDER BY id DESC ;
@@ -20,7 +20,20 @@
         UPDATE qf_out set jlqz="已签字" where id=#{id}
     </update>
     <!---->
-    <update id="updateBack" parameterType="int">
+    <update id="updateBack">
         UPDATE qf_out set ftime=#{time} where id=#{id}
     </update>
+    <!--getNoDo-->
+    <select id="getNoDo" resultType="int">
+        select count(*) from qf_out where jlqz='未签字'
+    </select>
+
+
+    <select id="getMinmeOutList" resultType="com.xxxweb.entity.Out" parameterType="int">
+        select * from qf_out where uid=#{id}
+    </select>
+
+    <select id="getAllOutListByWeight" resultType="com.xxxweb.entity.Out" parameterType="int">
+        select * from qf_out where weight &lt; #{weight}
+    </select>
 </mapper>
