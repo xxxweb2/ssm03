@@ -59,6 +59,15 @@ public class AdminController {
 
 
         ArrayList<Sign> signListDetail = signService.getSignListDetail(user.getId(), day);
+        int len = signListDetail.size();
+        for (int i = 0; i < len; i++) {
+
+            String t = signListDetail.get(i).getTime();
+            System.out.println("time1: " + t);
+            String[] split = t.split("\\.");
+            signListDetail.get(i).setTime(split[0]);
+        }
+
         model.addAttribute("signList", signListDetail);
 
 
@@ -169,6 +178,9 @@ public class AdminController {
         Calendar instance = Calendar.getInstance();
         int hour = instance.get(Calendar.HOUR_OF_DAY);
 
+
+        System.out.println("hour: " + hour);
+
         Sign sign = new Sign();
 //            session.setAttribute("user", userByName);
 
@@ -183,6 +195,7 @@ public class AdminController {
 
 //            查询数据库今天是否打卡
             int day = instance.get(Calendar.DAY_OF_MONTH);
+            day++;
             int isDa = signService.isDa(day);
             if (isDa > 0) {
 //                打过卡 早退
@@ -194,8 +207,8 @@ public class AdminController {
                 sign.setState(2);
             }
         }
-        if (hour > 18) {
-            sign.setState(0);
+        if (hour >= 18) {
+            sign.setState(4);
             res = 2;
         }
 

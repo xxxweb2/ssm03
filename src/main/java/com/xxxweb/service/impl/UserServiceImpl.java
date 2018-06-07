@@ -1,6 +1,7 @@
 package com.xxxweb.service.impl;
 
 import com.xxxweb.dao.UserDao;
+import com.xxxweb.entity.Department;
 import com.xxxweb.entity.QfUser;
 import com.xxxweb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,9 @@ import java.util.ArrayList;
 
 @Service
 public class UserServiceImpl implements UserService {
+
+
+
     @Autowired
     private UserDao userDao;
 
@@ -45,4 +49,7 @@ public class UserServiceImpl implements UserService {
         return userDao.getAllOutListByWeight(weight);
     }
 
+    public Department getDepById(int id) {
+        return userDao.getDepById(id);
+    }
 }

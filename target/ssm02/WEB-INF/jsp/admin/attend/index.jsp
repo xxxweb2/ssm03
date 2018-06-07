@@ -2,6 +2,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ include file="../common/header.jsp" %>
 <style>
+    tr, td, th {
+        text-align: center;
+    }
+
     #schedule-box {
         width: 320px;
         margin: 0 auto;
@@ -149,10 +153,41 @@
         </div>
         <input type="submit" value="搜索" class="btn btn-success" style="margin-top: 24px;">
     </form>
-    <h3>2018-02-05 全天签到打卡延迟分析</h3>
+    <h3><c:choose><c:when test="${indexTime!=null}">${indexTime}</c:when></c:choose> 全天签到打卡延迟分析</h3>
 
 
     <div id="chart_1" class="chart"></div>
+
+
+    <table class="table table-striped">
+        <tr>
+            <th>部门</th>
+            <th>姓名</th>
+            <th>时间</th>
+            <th>状态</th>
+        </tr>
+
+
+        <c:forEach items="${requestScope.get('sign')}" var="item">
+            <tr  style="<c:choose>
+                <c:when test="${item.state==2}">color: #ff0000;</c:when>
+
+            </c:choose>
+            ">
+                <td>${item.posName}</td>
+                <td>${item.name}</td>
+                <td>${item.time}</td>
+                <td>
+                    <c:choose>
+                        <c:when test="${item.state==0}">上班正常打卡</c:when>
+                        <c:when test="${item.state==2}">迟到</c:when>
+                        <c:when test="${item.state==3}">早退</c:when>
+                        <c:when test="${item.state==4}">下班正常打卡</c:when>
+                    </c:choose>
+                </td>
+            </tr>
+        </c:forEach>
+    </table>
 </div>
 
 <script type="text/javascript">

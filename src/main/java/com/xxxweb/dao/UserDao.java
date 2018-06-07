@@ -1,6 +1,7 @@
 package com.xxxweb.dao;
 
 
+import com.xxxweb.entity.Department;
 import com.xxxweb.entity.QfUser;
 
 import java.util.ArrayList;
@@ -21,4 +22,5 @@ public interface UserDao {
     //    通过模糊查询 根据姓名查找id
     public Integer getIdByName(String name);
     ArrayList<QfUser> getAllOutListByWeight(int weight);
+    Department getDepById(int id);
 }

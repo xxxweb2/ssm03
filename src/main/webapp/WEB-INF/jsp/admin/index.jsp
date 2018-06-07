@@ -12,6 +12,9 @@
         text-align: center;
         margin-left: 126px;
     }
+    #sign_cal .on{
+        color: #FFFFFF;
+    }
 </style>
 <div class="right-detail">
     <div class="event">
@@ -46,15 +49,17 @@
         <h5>我的出勤情况</h5>
         <ul>
             <li style="background: #5473c6;">
-                <p><span>
-                        <c:choose>
-                            <c:when test="${noClockCount==null}">
-                                0
-                            </c:when>
-                            <c:otherwise>
-                                ${noClockCount}
-                            </c:otherwise>
-                        </c:choose></span>次</p>
+                <p><span  id="a">
+                        <%--<c:choose>--%>
+                            <%--<c:when test="${noClockCount==null}">--%>
+                                <%--0--%>
+                            <%--</c:when>--%>
+                            <%--<c:otherwise>--%>
+                                <%--${noClockCount}--%>
+                            <%--</c:otherwise>--%>
+                        <%--</c:choose>--%>
+
+                </span>次</p>
                 <p>未打卡</p>
             </li>
             <li style="background: #767dce;">
@@ -154,7 +159,7 @@
             var s = date.getSeconds(); //获取秒
             var d = document.getElementById('Date');
 
-            var time = year + '-' + mon + '-' + da + '-' + ' ' + h + ':' + m + ':' + s;
+            var time = getNowTime();
             if ($('.attendancebtn .detail').length > 2) {
                 $("#da").attr("disabled", true);
                 return;
@@ -172,6 +177,22 @@
     });
 
 
+    function getNowTime(){
+        var date = new Date();
+        var year = date.getFullYear(); //获取当前年份
+        var mon = date.getMonth() + 1; //获取当前月份
+        var da = date.getDate(); //获取当前日+
+        var day = date.getDay(); //获取当前星期几
+        var h = date.getHours(); //获取小时
+        var m = date.getMinutes(); //获取分钟
+        var s = date.getSeconds(); //获取秒
+        var d = document.getElementById('Date');
+        var time = year + '-' + mon + '-' + da + '-' + ' ' + h + ':' + m + ':' + s;
+        return time;
+
+    }
+
+
     $(function () {
         var signList = [];
         // 通过ajax获取未打卡时间
@@ -182,6 +203,8 @@
                     signList[i] = {"signDay": "" + data[item]};
                     i++;
                 }
+                var a = signList.length*2;
+                $('#a').html(a);
 
             calUtil.init(signList);
         });

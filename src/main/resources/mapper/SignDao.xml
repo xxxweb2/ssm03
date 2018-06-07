@@ -43,6 +43,23 @@
         </if>
     </select>
 
+    <select id="getSignByFilter2" parameterType="int" resultType="com.xxxweb.entity.Sign">
+        SELECT * from sign where YEAR(TIME )=#{year}
+        <if test="state != null">
+            <if test="state != 9">
+                and state = #{state}
+            </if>
+            <if test="state == 9">
+                and state in (3,4)
+            </if>
+        </if>
+        and MONTH(TIME ) =#{month} and DAYOFMONTH (time) = #{day}
+        <if test="uid != 0">
+            and uid = #{uid}
+        </if>
+    </select>
+
+
     <select id="getSignCountById" parameterType="int" resultType="int">
         SELECT COUNT(*) from sign where id=#{id}
     </select>

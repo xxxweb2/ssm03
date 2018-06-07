@@ -50,4 +50,8 @@ public class SignServiceImpl implements SignService {
         return signDao.getSignCountById(id);
     }
 
+    public ArrayList<Sign> getSignByFilter2(int year, int month, int day, Integer state, int uid) {
+        return signDao.getSignByFilter2(year,month,day,state,uid);
+    }
+
 }

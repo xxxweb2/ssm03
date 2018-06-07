@@ -32,6 +32,12 @@
         SELECT * from qf_user WHERE id=#{id}
     </select>
 
+    <select id="getDepById" resultType="com.xxxweb.entity.Department" parameterType="int">
+        <!-- 具体的sql -->
+        SELECT * from department WHERE id=#{id}
+    </select>
+
+
     <select id="getIdByName" resultType="int" parameterType="String">
         <!-- 具体的sql -->
         SELECT id from qf_user WHERE name LIKE "%"#{name}"%" limit 1
